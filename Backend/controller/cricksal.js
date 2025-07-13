@@ -90,12 +90,12 @@ const getSingleCricksal = async (req, res) => {
 const storeCricksal = async (req, res, next) => {
   try {
       if (!req.files || !req.files.images) {
-          return res.status(400).send({ msg: "At least 5 images are required." });
+          return res.status(400).send({ msg: "At least 2 images are required." });
       }
 
       let images = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
-      if (images.length < 5) {
-          return res.status(400).send({ msg: "Please upload at least 5 images." });
+      if (images.length < 2) {
+          return res.status(400).send({ msg: "Please upload at least 2 images." });
       }
 
       let imagePaths = [];

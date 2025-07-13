@@ -25,9 +25,9 @@ const CricksalSchema = new Schema({
     required: true,
     validate: {
       validator: function (value) {
-        return value.length >= 3; // Ensures at least 3 images
+        return value.length >= 1; 
       },
-      message: "At least 3 images are required.",
+      message: "At least 1 image is required.",
     },
   },
   createdBy: {
