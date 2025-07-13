@@ -45,31 +45,7 @@ const App = () => {
 
   // Show loading state until data is fetched
   if (loading) return <div>Loading...</div>;
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const user = useSelector((state) => state.user.user);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     try {
-  //       const userData = jwtDecode(token);
-  //       dispatch(setUser(userData));
-        
-
-  //       // Redirect based on role when user refreshes the page
-  //       if (userData.role === 'admin') {
-  //         navigate('/admin');
-  //       } else if (userData.role === 'owner') {
-  //         navigate('/owner');
-  //       }
-  //     } catch (error) {
-  //       console.error("Invalid token:", error);
-  //       localStorage.removeItem("token"); // Remove invalid token
-        
-  //     }
-  //   }
-  // }, [dispatch]);
+  
 
   return (
     <>

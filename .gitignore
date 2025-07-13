@@ -11,6 +11,9 @@ yarn-error.log*
 .jpg
 .jpeg
 .gif
+.avif
+.svg   
+
 
 
 # OS generated files
