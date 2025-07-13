@@ -50,37 +50,6 @@ const getCricksals = async (req, res, next) => {
 };
 
 
-// const getSingleCricksal = async (req, res) => {
-//   try {
-//     // Fetch the cricksal by ID
-//     let cricksal = await Cricksal.findById(req.params.id);
-    
-//     if (!cricksal) {
-//       return res.status(404).json({ message: "Cricksal not found" });
-//     }
-
-//     // Fetch all reviews for this cricksal
-//     const reviews = await Review.find({ cricksal: req.params.id });
-
-//     // Calculate average rating
-//     let avgRating = null;
-//     if (reviews.length > 0) {
-//       const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-//       avgRating = Number((totalRating / reviews.length).toFixed(1)); // Round to 1 decimal place
-//     }
-
-//     // Convert cricksal to plain object and add avgRating
-//     cricksal = cricksal.toObject(); // Convert Mongoose document to plain JS object
-//     cricksal.avgRating = avgRating || "No ratings"; // Add avgRating to response
-//     cricksal.reviewCount = reviews.length; // Optionally add review count
-
-//     // Send response
-//     res.status(200).json(cricksal);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
 
 
 // Store a New Cricksal with Multiple Images
