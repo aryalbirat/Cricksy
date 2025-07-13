@@ -1,7 +1,5 @@
 
 const Booking = require("../model/booking");
-const { initiateKhaltiPayment } = require("./PaymentController");
-const Payment = require("../model/payment");
 const User = require("../model/User");
 
 const { getAllCricksalsForAdmin } = require("./adminManage");
@@ -32,7 +30,7 @@ const makeBooking = async (req, res, next) => {
       return res.status(400).json({ message: "Slot already booked." });
     }
 
-    //Create Booking with status "pending"
+    // Create Booking with status "upcoming" (no payment required)
     const newBooking = new Booking({
       user: req.user._id,
       cricksalArena,
@@ -40,45 +38,19 @@ const makeBooking = async (req, res, next) => {
       startTime,
       endTime,
       totalAmount,
-      status: "pending",
-    });
-
-    // await newBooking.save();
-
-    // Initiate Khalti Payment
-    const paymentDetails = await initiateKhaltiPayment({
-      bookingId: newBooking._id,
-      totalPrice: totalAmount,
-      user: req.user,
+      status: "upcoming",
     });
 
     await newBooking.save();
 
-    // Step 3: Create a Payment record
-    const payment = new Payment({
-      bookingId: newBooking._id,
-      userId: req.user._id,
-      cricksalArena,
-      bookingDate,
-      startTime,
-      endTime,
-      amount: totalAmount,
-      paymentIdx: paymentDetails.pidx,
-      paymentStatus: "pending",
-      paymentMethod: "Khalti",
-    });
-
-    await payment.save();
-
     res.status(201).json({
-      message: "Payment initiated",
-      paymentUrl: paymentDetails.paymentUrl,
-      paymentId: payment._id,
+      message: "Booking created successfully",
       bookingId: newBooking._id,
+      booking: newBooking
     });
 
   } catch (err) {
-    console.error("Error initiating booking:", err.message);
+    console.error("Error creating booking:", err.message);
     res.status(500).json({ message: "Internal server error", error: err.message });
     next(err);
   }
@@ -443,8 +415,6 @@ const updateBookingStatus = async (req, res) => {
       let newStatus;
       if (now < startDateTime) {
         newStatus = 'upcoming';
-      } else if (now >= startDateTime && now <= endDateTime) {
-        newStatus = 'pending';
       } else if (now > endDateTime) {
         newStatus = 'completed';
       }
