@@ -4,50 +4,6 @@ const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
 
-
-
-// const signUpSchema = Joi.object({
-//   FirstName: Joi.string().alphanum().min(3).max(30).required(),
-//   LastName: Joi.string().alphanum().min(3).max(30).required(),
-//   password: Joi.string().alphanum().min(8).max(30).required(),
-//   Email: Joi.string().email().required(),
-//   // phoneNumber: Joi.string().pattern(/^[0-9]{9,10}$/).required(),
-//   phoneNumber: Joi.string().required(),
-
-//   address: Joi.string().min(5).max(100).optional(),
-// });
-
-// const signup = async (req, res, next) => {
-//   try {
-//     const { error } = signUpSchema.validate(req.body, {
-//       abortEarly: false,
-//       stripUnknown: true,
-//     });
-//     if (error) {
-//       let errors = error.details.map((el) => {
-//         return {
-//           msg: el.message,
-//           params: el.context.key,
-//         };
-//       });
-//       return res.status(400).send({ errors });
-//     }
-
-
-//     let hashedPassword = await bcrypt.hash(req.body.password, 10);
-//     console.log(hashedPassword);
-
-//     let user = await User.create({ ...req.body, password: hashedPassword });
-//     let userObj = user.toObject();
-//     delete userObj.password;
-
-//     console.log(userObj);
-//     res.send(userObj);
-//   } catch (error) {
-//     console.log(error);
-//     next(error);
-//   }
-// };
 const signUpSchema = Joi.object({
   FirstName: Joi.string().alphanum().min(3).max(30).required(),
   LastName: Joi.string().alphanum().min(3).max(30).required(),

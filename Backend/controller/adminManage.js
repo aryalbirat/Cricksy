@@ -6,18 +6,6 @@ const { loggedInUsers } = require("./auth");
 const Booking = require('../model/booking')
 
 
-// const getAllUserForAdmin = async (req, res) => {
-//   try {
-//     if (req.user.role !== "admin") {
-//       return res.status(403).json({ message: "Access denied. Admins only." });
-//     }
-//     const users = await User.find({ role: { $ne: "admin" } }).select("-password");
-//     res.status(200).json({ users });
-//   } catch (error) {
-//     console.error("Error fetching users:", error);
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
 
 const getAllUserForAdmin = async (req, res) => {
   try {
@@ -90,29 +78,6 @@ const getAllUserForAdmin = async (req, res) => {
   }
 };
 
-// Controller to get all cricksals for the admin
-// const getAllCricksalsForAdmin = async (req, res) => {
-//   try {
-//     // Ensure the logged-in user is an admin
-//     if (req.user.role !== 'admin') {
-//       return res.status(403).json({ message: 'Access denied. Admins only.' });
-//     }
-
-//     // Fetch all cricksals (joined with user details - owner)
-//     const cricksals = await Cricksal.find().populate('createdBy', 'FirstName LastName Email');
-
-//     console.log('Cricksals:', cricksals);
-  
-//     if (!cricksals.length) {
-//       return res.status(404).json({ message: 'No cricksals found.' });
-//     }
-
-//     res.status(200).json({ cricksals });
-//   } catch (error) {
-//     console.error('Error fetching cricksals:', error);
-//     res.status(500).json({ message: 'Server error', error: error.message });
-//   }
-// };
 
 const getAllCricksalsForAdmin = async (req, res) => {
   try {

@@ -12,7 +12,7 @@ const bookingRoutes = require("./routes/booking.js");
 const cricksalRoutes = require("./routes/cricksal.js")
 const AllUserRoutes = require("./routes/AdminPanel.js")
 
-const PaymentRoutes = require("./routes/PaymentRoutes.js")
+// const PaymentRoutes = require("./routes/PaymentRoutes.js")
 
 const profilesRoutes = require("./routes/profiles.js")
 
@@ -35,7 +35,7 @@ app.use(authRoutes);
 app.use(cricksalRoutes);
 app.use(bookingRoutes)
 app.use(AllUserRoutes);
-app.use(PaymentRoutes) 
+// app.use(PaymentRoutes) 
 app.use(profilesRoutes);
 app.use(reviewRoutes);
 
