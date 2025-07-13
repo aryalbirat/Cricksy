@@ -29,15 +29,6 @@ router.put("/api/owner/cricksal/:id", checkAuthorization, isOwner, updateCricksa
 
 
 
-
-// // Admin-specific routes for cricksals
-// router.post("/api/admin/cricksals", checkAuthorization, isAdmin, storeCricksal); // Admin can create cricksal
-// router.put("/api/admin/cricksals/:id", checkAuthorization, isAdmin, updateCricksal); // Admin can update cricksal
-// router.delete("/api/admin/cricksals/:id", checkAuthorization, isAdmin, deleteCricksal); // Admin can delete cricksal
-// router.get("/api/owners", checkAuthorization, isAdmin, getAllOwners); 
-// router.delete("/api/owners/:id", checkAuthorization, isAdmin, deleteOwner); 
-// router.post('/api/admin/owner', checkAuthorization, isAdmin, addOwner);
-
 router.get("/api/cricksals", checkAuthorization, isAdmin, getAllCricksalsForAdmin)
 router.delete("/api/cricksals/:cricksalId", checkAuthorization, isAdmin, deleteCricksalByAdmin)
 
