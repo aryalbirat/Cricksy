@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { setUser } from './features/user/userSlice';
-
+import ScrollToTop from './client/components/ScrollToTop';
 import Header from './client/components/Header';
 import Home from './client/Pages/Home';
 import Mybooking from './client/Pages/MyBooking';
@@ -49,6 +49,7 @@ const App = () => {
 
   return (
     <>
+      <ScrollToTop />
       {user?.role === 'admin' ? (
         <Routes>
           <Route path="/admin/*" element={<AdminHome />} />
