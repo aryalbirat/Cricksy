@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="bg-black/95 backdrop-blur-xl border-b border-blue-900/30 shadow-2xl sticky top-0 z-50"
+      className="bg-gradient-to-r from-black from-10% via-slate-950 via-50% to-blue-950 to-100%  backdrop-blur-xl border-b border-blue-900/30 shadow-2xl sticky top-0 z-50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -36,7 +36,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            CricksalHub
+            Cricksy
           </motion.h1>
         </Link>
 
