@@ -6,7 +6,6 @@ const { loggedInUsers } = require("./auth");
 const Booking = require('../model/booking')
 
 
-
 const getAllUserForAdmin = async (req, res) => {
   try {
     // Ensure the logged-in user is an admin
