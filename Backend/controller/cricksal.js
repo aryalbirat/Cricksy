@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const Review = require("../model/review"); // Adjust path to your Review model
 
 
-
 const getCricksals = async (req, res, next) => {
   console.log(req.query);
   let searchTerm = req.query.searchTerm || "";

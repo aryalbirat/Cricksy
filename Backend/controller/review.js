@@ -39,11 +39,11 @@ const createReview = async (req, res) => {
     }
 
     // Check for completed booking
-    const completedBooking = await Booking.findOne({
-      user: userId,
-      cricksalArena: cricksalId,
-      status: "completed",
-    });
+const completedBooking = await Booking.findOne({
+  user: userId,
+  cricksalArena: cricksalId,
+  status: { $in: ["completed", "upcoming"] } // Accept both completed and upcoming
+});
     if (!completedBooking) {
       return res.status(403).json({
         message: "You can only review after completing a booking for this cricksal",
