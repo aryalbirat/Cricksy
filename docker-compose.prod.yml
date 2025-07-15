@@ -24,10 +24,10 @@ services:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+      target: production
+    expose:
+      - "80"
     environment:
-      - VITE_API_URL=http://54.164.187.32/api
       - NODE_ENV=production
     restart: unless-stopped
     depends_on:

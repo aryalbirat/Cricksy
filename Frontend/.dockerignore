@@ -12,12 +12,16 @@ yarn-error.log*
 README.md
 .nyc_output
 coverage
-.nyc_output
 *.log
 logs
 .DS_Store
 .vscode
 .idea
+*.swp
+*.swo
+dist
+.parcel-cache
+.cache
 *.swp
 *.swo
 *~

@@ -1,9 +1,7 @@
-FROM node:18-alpine
+# Multi-stage build for production frontend
+FROM node:18-alpine AS builder
 
 WORKDIR /app
-
-# Install curl for health checks
-RUN apk add --no-cache curl
 
 # Copy package files
 COPY package*.json ./
@@ -14,15 +12,24 @@ RUN npm ci
 # Copy application code
 COPY . .
 
-# Set proper permissions
-RUN chown -R node:node /app
-USER node
+# Build the application
+RUN npm run build
 
-EXPOSE 3000
+# Production stage - use nginx to serve static files
+FROM nginx:alpine AS production
+
+# Copy built assets from builder stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy custom nginx config for SPA routing
+COPY nginx-frontend.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80 (nginx default)
+EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000 || exit 1
+  CMD curl -f http://localhost || exit 1
 
-# Configure Vite to run on port 3000 and bind to all interfaces
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
