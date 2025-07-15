@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaTrashAlt } from "react-icons/fa";
 
 const ManageCricksal = () => {
   const [cricksals, setCricksals] = useState([]);
@@ -73,104 +72,129 @@ const ManageCricksal = () => {
     fetchCricksals(pagination.currentPage);
   }, [search, pagination.currentPage]);
 
-  if (loading) return <div className="text-center text-teal-400 font-semibold">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 p-6 ml-64">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-white text-xl">Loading cricksals...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Manage Cricksals</h2>
+    <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 p-6 ml-64">
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8">
+        Manage Arenas
+      </h1>
 
       {/* Search input */}
-      <div className="mb-6 flex justify-between items-center">
-        <input
-          type="text"
-          value={search}
-          onChange={handleSearchChange}
-          placeholder="Search cricksals by name"
-          className="border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+        <div className="flex justify-between items-center">
+          <input
+            type="text"
+            value={search}
+            onChange={handleSearchChange}
+            placeholder="Search cricksals by name"
+            className="px-4 py-3 bg-black/50 border border-blue-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 flex-grow max-w-md"
+          />
+        </div>
       </div>
 
+      {/* Error Message */}
       {error && (
-        <div className="text-center py-4 text-red-500">{error}</div>
+        <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-red-900/30 p-6 mb-8">
+          <div className="text-center py-8 text-red-300">{error}</div>
+        </div>
       )}
 
+      {/* No cricksals found messages */}
       {!error && cricksals.length === 0 && search.trim() !== "" ? (
-        <div className="text-center py-10 text-gray-500">No cricksals found</div>
+        <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+          <div className="text-center py-8 text-gray-300">No cricksals found</div>
+        </div>
       ) : !error && cricksals.length === 0 ? (
-        <div className="text-center py-10 text-gray-500">No cricksals available</div>
+        <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+          <div className="text-center py-8 text-gray-300">No cricksals available</div>
+        </div>
       ) : (
         !error && (
-          <div className="overflow-x-auto shadow-md rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cricksal Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Owner</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price per Hour</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                  {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> */}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {cricksals.map((cricksal) => (
-                  <tr key={cricksal._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cricksal.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {cricksal.createdBy ? `${cricksal.createdBy.FirstName} ${cricksal.createdBy.LastName}` : "N/A"}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₨{cricksal.pricePerHour}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cricksal.location}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {cricksal.images && cricksal.images.length > 0 ? (
-                        <img
-                          src={`http://localhost:8000/${cricksal.images[0]}`}
-                          alt={`Cricksal ${cricksal.name}`}
-                          className="w-16 h-16 object-cover rounded-md shadow-md"
-                        />
-                      ) : (
-                        <span>No image available</span>
-                      )}
-                    </td>
-                    {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <button
-                        className="text-red-600 hover:text-red-800 p-2"
-                        onClick={() => handleDelete(cricksal._id)}
-                      >
-                        <FaTrashAlt size={18} />
-                      </button>
-                    </td> */}
+          <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-blue-900/50">
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">Cricksal Name</th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">Owner</th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">Price per Hour</th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">Location</th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">Image</th>
+                    {/* <th className="px-4 py-3 text-left text-gray-300 font-medium">Actions</th> */}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {cricksals.map((cricksal) => (
+                    <tr key={cricksal._id} className="border-b border-blue-900/30 hover:bg-blue-900/20 transition-colors">
+                      <td className="px-4 py-3 text-gray-200">{cricksal.name}</td>
+                      <td className="px-4 py-3 text-gray-200">
+                        {cricksal.createdBy ? `${cricksal.createdBy.FirstName} ${cricksal.createdBy.LastName}` : "N/A"}
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">₨{cricksal.pricePerHour}</td>
+                      <td className="px-4 py-3 text-gray-200">{cricksal.location}</td>
+                      <td className="px-4 py-3 text-gray-200">
+                        {cricksal.images && cricksal.images.length > 0 ? (
+                          <img
+                            src={`http://localhost:8000/${cricksal.images[0]}`}
+                            alt={`Cricksal ${cricksal.name}`}
+                            className="w-16 h-16 object-cover rounded-md shadow-md border border-blue-900/30"
+                          />
+                        ) : (
+                          <span>No image available</span>
+                        )}
+                      </td>
+                      {/* <td className="px-4 py-3 text-gray-200">
+                        <button
+                          className="text-red-400 hover:text-red-300 p-2 rounded hover:bg-red-900/20 transition-colors"
+                          onClick={() => handleDelete(cricksal._id)}
+                        >
+                          <FaTrashAlt size={18} />
+                        </button>
+                      </td> */}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )
       )}
 
+      {/* Pagination */}
       {!error && cricksals.length > 0 && (
-        <div className="flex justify-between items-center mt-4">
-          <div className="text-sm text-gray-600">
-            Showing {cricksals.length} of {pagination.totalItems} arenas
-          </div>
-          <div className="flex space-x-2">
-            <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              disabled={pagination.currentPage === 1}
-            >
-              Previous
-            </button>
-            <span className="px-4 py-2 text-gray-700">
-              Page {pagination.currentPage} of {pagination.totalPages}
-            </span>
-            <button
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              disabled={pagination.currentPage === pagination.totalPages}
-            >
-              Next
-            </button>
+        <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6">
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-300">
+              Showing {cricksals.length} of {pagination.totalItems} arenas
+            </div>
+            <div className="flex space-x-2">
+              <button
+                className="px-4 py-2 bg-black/50 border border-blue-900/50 text-gray-300 rounded-lg hover:bg-blue-900/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => handlePageChange(pagination.currentPage - 1)}
+                disabled={pagination.currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="px-4 py-2 text-gray-300 flex items-center">
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </span>
+              <button
+                className="px-4 py-2 bg-black/50 border border-blue-900/50 text-gray-300 rounded-lg hover:bg-blue-900/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => handlePageChange(pagination.currentPage + 1)}
+                disabled={pagination.currentPage === pagination.totalPages}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       )}
