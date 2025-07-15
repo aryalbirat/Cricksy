@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FaMapMarkerAlt, FaStar, FaArrowLeft, FaPhone, FaEnvelope } from "react-icons/fa";
