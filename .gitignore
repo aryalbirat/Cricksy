@@ -7,13 +7,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.avif
-*.svg   
-
 
 
 # OS generated files
