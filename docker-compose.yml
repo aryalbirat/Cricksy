@@ -1,4 +1,17 @@
 services:
+  mongodb:
+    image: mongo:6.0
+    container_name: cricksy-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=Cricksy
+    restart: unless-stopped
+    networks:
+      - cricksy-network
+
   backend:
     build:
       context: ./Backend
@@ -11,7 +24,8 @@ services:
       - ./Backend/uploads:/app/uploads
     env_file:
       - .env.docker
-    depends_on: []
+    depends_on:
+      - mongodb
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8000/api/health"]
@@ -19,13 +33,15 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    networks:
+      - cricksy-network
 
   frontend:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "5173:5173"
     volumes:
       - ./Frontend:/app
       - /app/node_modules
@@ -34,3 +50,12 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+    networks:
+      - cricksy-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  cricksy-network:
+    driver: bridge

@@ -11,11 +11,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Install nodemon globally for development
+RUN npm install -g nodemon
+
 # Copy application code
 COPY . .
 
-# Create uploads directory
-RUN mkdir -p uploads
+# Create uploads directory with proper permissions
+RUN mkdir -p uploads && chmod 755 uploads
 
 # Expose port
 EXPOSE 8000
