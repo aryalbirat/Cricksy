@@ -1,4 +1,3 @@
-
 const Booking = require("../model/booking");
 const User = require("../model/User");
 
@@ -482,6 +481,71 @@ const cancelBooking = async (req, res) => {
   }
 };
 
+const updateBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { bookingDate, startTime, endTime, totalAmount, status } = req.body;
+
+    console.log("📝 Updating booking with ID:", id);
+
+    // Find the booking
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    // Check if admin is making the request
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: "Access denied. Admins only." });
+    }
+
+    // Prepare update object
+    const updateData = {};
+    if (bookingDate) updateData.bookingDate = bookingDate;
+    if (startTime) updateData.startTime = startTime;
+    if (endTime) updateData.endTime = endTime;
+    if (totalAmount) updateData.totalAmount = totalAmount;
+    if (status) updateData.status = status;
+    updateData.updatedAt = new Date();
+
+    // If updating time slots, check for conflicts (excluding current booking)
+    if (bookingDate || startTime || endTime) {
+      const checkDate = bookingDate || booking.bookingDate;
+      const checkStartTime = startTime || booking.startTime;
+      const checkEndTime = endTime || booking.endTime;
+
+      const conflictingBooking = await Booking.findOne({
+        _id: { $ne: id }, // Exclude current booking
+        cricksalArena: booking.cricksalArena,
+        bookingDate: checkDate,
+        status: { $ne: "cancelled" },
+        $or: [
+          { startTime: { $lt: checkEndTime }, endTime: { $gt: checkStartTime } },
+        ],
+      });
+
+      if (conflictingBooking) {
+        return res.status(400).json({ message: "Time slot conflict with another booking." });
+      }
+    }
+
+    // Update the booking
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    ).populate('cricksalArena', 'name location')
+     .populate('user', 'FirstName LastName Email');
+
+    res.status(200).json({
+      message: "Booking updated successfully",
+      booking: updatedBooking
+    });
+  } catch (error) {
+    console.error("Error updating booking:", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 module.exports = {
   makeBooking,
@@ -489,6 +553,7 @@ module.exports = {
   getAvailableSlots,
   getAllBookingsOfUsers,
   deleteBooking,
+  updateBooking,
   getAllBookingsForAdmin,
   startBookingStatusUpdater,
   cancelBooking

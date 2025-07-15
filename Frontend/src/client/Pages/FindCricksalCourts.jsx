@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaStar, FaMapMarkerAlt, FaSearch, FaFilter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -277,13 +278,13 @@ const FindCricksalCourts = () => {
                         <div className="flex justify-between mt-4 pt-3 border-t border-blue-900/30">
                           <button
                             className="text-blue-400 font-semibold hover:text-blue-300 transition-colors"
-                            onClick={() => navigate(`/cricksaldetail/${cricksal._id}`)}
+                            onClick={() => navigate(`/cricksal/${cricksal._id}`)}
                           >
                             View Details
                           </button>
                           <button
                             className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-blue-900/30"
-                            onClick={() => navigate(`/bookarena/${cricksal._id}`)}
+                            onClick={() => navigate(`/cricksal/${cricksal._id}`)}
                           >
                             Book Now
                           </button>
@@ -296,7 +297,7 @@ const FindCricksalCourts = () => {
                     <FaSearch className="mx-auto text-4xl text-blue-400 mb-4 opacity-60" />
                     <h3 className="text-xl font-semibold text-white mb-2">No Cricksal Courts Found</h3>
                     <p className="text-gray-400">
-                      We couldn't find any cricksal courts matching your criteria. Try adjusting your filters.
+                      We could not find any cricksal courts matching your criteria. Try adjusting your filters.
                     </p>
                   </div>
                 )}
@@ -309,5 +310,6 @@ const FindCricksalCourts = () => {
     </div>
   );
 };
+
 
 export default FindCricksalCourts;

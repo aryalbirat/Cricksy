@@ -1,226 +1,58 @@
-// import React, { useEffect, useState } from "react";
-// import { Link, useLocation } from "react-router-dom";
-// import axios from "axios";
 
-// const PaymentSuccess = () => {
-//   const location = useLocation();
-//   const [paymentStatus, setPaymentStatus] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   // Extract query parameters from the URL
-//   const params = new URLSearchParams(location.search);
-//   const pidx = params.get("pidx");
-//   const transactionId = params.get("transaction_id");
-//   const amount = params.get("amount");
-//   const purchaseOrderId = params.get("purchase_order_id");
-
-//   useEffect(() => {
-//     const verifyPayment = async () => {
-//       try {
-//         setLoading(true);
-//         const response = await axios.get(
-//           "http://localhost:8000/api/payment/callback",
-//           {
-//             params: {
-//               pidx,
-//               transaction_id: transactionId,
-//               amount,
-//               purchase_order_id: purchaseOrderId,
-//             },
-//           }
-//         );
-
-//             // Log the response to see what you are getting
-//             console.log(response);
-
-//         if (response.status === 200) {
-//           setPaymentStatus("success");
-//         } else {
-//           setPaymentStatus("failure");
-//         }
-//       } catch (err) {
-//         setPaymentStatus("failure"); 
-//         setError("Payment verification failed. Please try again.");
-        
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     verifyPayment();
-//   }, [pidx, transactionId, amount, purchaseOrderId]);
-
-//   if (loading) {
-//     return (
-//       <div className="flex flex-col items-center justify-center min-h-screen">
-//         <h1 className="text-3xl font-bold mb-4">Verifying Payment...</h1>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="flex flex-col items-center justify-center min-h-screen">
-//       <h1 className="text-3xl font-bold mb-4">
-//         {paymentStatus === "success"
-//           ? "Payment Successful!"
-//           : "Payment Failed!"}
-//       </h1>
-//       {paymentStatus === "success" && (
-//         <p className="text-lg mb-8">Your booking is confirmed. Thank you!</p>
-//       )}
-//       {paymentStatus === "failure" && (
-//         <p className="text-lg mb-8">
-//           There was an issue with your payment. Please try again.
-//         </p>
-//       )}
-//       {error && <p className="text-red-500 mb-8">{error}</p>}
-//       <Link
-//         to="/"
-//         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-//       >
-//         Go to Home
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default PaymentSuccess;
-
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
-import { motion } from "framer-motion";
-import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentSuccess = () => {
-  const location = useLocation();
-  const [paymentStatus, setPaymentStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Extract query parameters from the URL
-  const params = new URLSearchParams(location.search);
-  const pidx = params.get("pidx");
-  const transactionId = params.get("transaction_id");
-  const amount = params.get("amount");
-  const purchaseOrderId = params.get("purchase_order_id");
-
-  useEffect(() => {
-    const verifyPayment = async () => {
-      try {
-        setLoading(true);
-
-        // Send GET request to verify the payment status
-        const response = await axios.get("http://localhost:8000/api/payment/callback", {
-          params: {
-            pidx,
-            transaction_id: transactionId,
-            amount,
-            purchase_order_id: purchaseOrderId,
-          },
-        });
-
-        console.log("Full response:", response);
-        console.log("Response data:", response.data);
-
-        // Check if payment is successful
-        if (response.status === 200 && response.data.status === "success") {
-          setPaymentStatus("success");
-          
-        } else {
-          setPaymentStatus("failure");
-          setError(response.data.message || "Payment failed.");
-        }
-      } catch (err) {
-        console.error("Payment verification error:", err.response?.data || err.message);
-        setPaymentStatus("failure");
-        setError("");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifyPayment();
-  }, [pidx, transactionId, amount, purchaseOrderId]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-dark-blue to-accent-blue flex flex-col items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <FaSpinner className="text-6xl text-primary animate-spin mb-4" />
-          <h1 className="text-3xl font-bold text-white mb-4">Verifying Payment...</h1>
-        </motion.div>
-      </div>
-    );
-  }
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-blue to-accent-blue flex flex-col items-center justify-center px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20 max-w-md w-full"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-6"
-        >
-          {paymentStatus === "success" ? (
-            <FaCheckCircle className="text-6xl text-green-400 mx-auto" />
-          ) : (
-            <FaTimesCircle className="text-6xl text-red-400 mx-auto" />
-          )}
-        </motion.div>
-        
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-3xl font-bold mb-4 text-white"
-        >
-          {paymentStatus === "success" ? "Payment Successful!" : "Payment Cancelled!"}
-        </motion.h1>
-        
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          {paymentStatus === "success" && (
-            <p className="text-lg mb-8 text-white/90">Your booking is confirmed. Thank you!</p>
-          )}
-          {paymentStatus === "failure" && (
-            <p className="text-lg mb-8 text-white/90">
-              Your payment has been cancelled.
-            </p>
-          )}
-          {error && <p className="text-red-400 mb-8">{error}</p>}
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <Link
-            to="/"
-            className="inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex flex-col justify-center items-center relative overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-0 right-4 w-20 h-20 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-20 h-20 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center">
+        <div className="mb-8">
+          <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+        </div>
+
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Booking Confirmed!
+        </h1>
+
+        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-md mx-auto mb-8">
+          <p className="text-white text-lg">
+            Your booking has been confirmed successfully. No payment is required as the payment system has been disabled.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <button
+            onClick={() => navigate('/my-bookings')}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 mr-4"
           >
-            Go to Home
-          </Link>
-        </motion.div>
-      </motion.div>
+            View My Bookings
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default PaymentSuccess;
+

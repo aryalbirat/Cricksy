@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt, FaTimes, FaSave } from 'react-icons/fa';
@@ -421,5 +422,6 @@ const Bookings = () => {
     </div>
   );
 };
+
 
 export default Bookings;

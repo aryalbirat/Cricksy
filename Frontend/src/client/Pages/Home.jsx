@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +10,7 @@ import Hero from "../components/Hero";
 const Home = () => {
   const [cricksals, setCricksals] = useState([]);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCricksals = async () => {
@@ -133,6 +135,7 @@ const Home = () => {
                       className="text-blue-400 hover:text-blue-300 font-semibold text-sm flex items-center gap-1"
                       whileHover={{ scale: 1.05, x: 5 }}
                       transition={{ duration: 0.2 }}
+                       onClick={() => navigate(`/cricksal/${cricksal._id}`)}
                     >
                       Book Now →
                     </motion.button>
@@ -187,5 +190,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
