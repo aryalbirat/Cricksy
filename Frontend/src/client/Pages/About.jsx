@@ -51,7 +51,7 @@ const About = () => {
           >
             About{" "}
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">
-              CricksalHub
+              Cricksy
             </span>
           </motion.h1>
           <motion.p 
@@ -80,7 +80,7 @@ const About = () => {
                   Our <span className="text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">Story</span>
                 </h2>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  Born from a passion for cricket and the frustration of finding quality courts, CricksalHub was created to bridge the gap between players and premium facilities.
+                  Born from a passion for cricket and the frustration of finding quality courts, Cricksy was created to bridge the gap between players and premium facilities.
                 </p>
                 <p className="text-gray-400 leading-relaxed">
                   We believe every cricket enthusiast deserves access to world-class facilities without the hassle of endless phone calls and uncertainty. Our platform connects you with verified, top-tier cricket courts, making your booking experience as smooth as a perfect cover drive.

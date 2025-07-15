@@ -6,7 +6,7 @@ const checkAuthorization = (req, res, next) => {
     let isloggedIn = false;
   
     try {
-      var decoded = jwt.verify(token, "shhhhh");  
+      var decoded = jwt.verify(token, process.env.JWT_SECRET);  
       req.user = decoded;
       console.log(req.user);
 

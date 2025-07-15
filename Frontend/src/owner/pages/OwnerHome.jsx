@@ -1,7 +1,7 @@
 
 import OwnerSidebar from '../components/OwnerSidebar'
 import OwnerDashboard from '../components/OwnerDashboard'
-import { BrowserRouter as  Routes, Route} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import OwnerCricksal from './OwnerCricksal';
 import AllBooking from './AllBooking';
 import ArenaReview from './ArenaReview';

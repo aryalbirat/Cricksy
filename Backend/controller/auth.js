@@ -37,7 +37,7 @@ const signup = async (req, res, next) => {
       role = "user";
     }
 
-    let hashedPassword = await bcrypt.hash(userData.password, 10);
+    let hashedPassword = await bcrypt.hash(userData.password, parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10);
 
     let user = await User.create({
       ...userData,
@@ -89,7 +89,7 @@ const login = async (req, res, next) => {
     if (matched) {
       user = user.toObject();
       delete user.password;
-      var token = jwt.sign(user, "shhhhh");
+      var token = jwt.sign(user, process.env.JWT_SECRET);
 
         // Store user session, but exclude admins
       if (user.role !== "admin") {
@@ -144,7 +144,7 @@ const becomeOwner = async (req, res, next) => {
         Email: updatedUser.Email,
         role: updatedUser.role,
       },
-      "shhhhh"
+      process.env.JWT_SECRET
     );
 
     return res.status(200).json({
