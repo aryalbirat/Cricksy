@@ -1,13 +1,4 @@
 services:
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=Cricksy
-
   backend:
     build:
       context: ./Backend
@@ -20,8 +11,7 @@ services:
       - ./Backend/uploads:/app/uploads
     env_file:
       - .env.docker
-    depends_on:
-      - mongo
+    depends_on: []
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8000/api/health"]
@@ -44,6 +34,3 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
-
-volumes:
-  mongo_data:
