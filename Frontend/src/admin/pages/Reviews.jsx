@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Reviews = () => {
@@ -79,139 +79,154 @@ const Reviews = () => {
 
   if (loading) {
     return (
-      <div className="text-center text-teal-400 font-semibold">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 p-6 ml-64">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-white text-xl">Loading reviews...</div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">All Reviews</h2>
+    <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 p-6 ml-64">
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8">
+        Reviews
+      </h1>
 
       {/* Search and Sort Controls */}
-      <div className="mb-6 flex flex-col md:flex-row gap-4 items-start md:items-center">
-        <form onSubmit={handleSearch} className="flex-grow">
-          <div className="flex gap-4">
+      <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+          <form onSubmit={handleSearch} className="flex-grow flex gap-4">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by username or cricksal name"
-              className="px-4 py-2 border rounded-md flex-grow"
+              className="px-4 py-3 bg-black/50 border border-blue-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 flex-grow"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300"
             >
               Search
             </button>
+          </form>
+          <div className="flex gap-4">
+            <select
+              value={sort.sortBy}
+              onChange={handleSortFieldChange}
+              className="px-4 py-3 bg-black/50 border border-blue-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            >
+              <option value="createdAt">Date</option>
+              <option value="rating">Rating</option>
+            </select>
+            <select
+              value={sort.sortOrder}
+              onChange={handleSortOrderChange}
+              className="px-4 py-3 bg-black/50 border border-blue-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+            >
+              <option value="desc">Descending</option>
+              <option value="asc">Ascending</option>
+            </select>
           </div>
-        </form>
-        <div className="flex gap-4">
-          <select
-            value={sort.sortBy}
-            onChange={handleSortFieldChange}
-            className="px-4 py-2 border rounded-md"
-          >
-            <option value="createdAt">Date</option>
-            <option value="rating">Rating</option>
-          </select>
-          <select
-            value={sort.sortOrder}
-            onChange={handleSortOrderChange}
-            className="px-4 py-2 border rounded-md"
-          >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
-          </select>
         </div>
       </div>
 
       {/* Error Message */}
       {(error || reviews.length === 0) && (
-        <div className="text-center py-10 text-red-500">
-          {error || 'No reviews found'}
+        <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-red-900/30 p-6 mb-8">
+          <div className="text-center py-8 text-red-300">
+            {error || 'No reviews found'}
+          </div>
         </div>
       )}
 
       {/* Table and Pagination (only shown if reviews exist) */}
       {reviews.length > 0 && (
         <>
-          <div className="overflow-x-auto shadow-md rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    User
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Cricksal Arena
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Location
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Comment
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Rating
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {reviews.map((review) => (
-                  <tr key={review._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.user ? `${review.user.FirstName} ${review.user.LastName}` : 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.cricksal?.name || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.cricksal?.location || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.comment || 'No comment'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.rating || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {review.createdAt
-                        ? new Date(review.createdAt).toLocaleDateString()
-                        : 'N/A'}
-                    </td>
+          <div className="bg-black/40 backdrop-blur-lg rounded-xl border border-blue-900/30 p-6 mb-8">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-blue-900/50">
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      User
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      Cricksal Arena
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      Location
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      Comment
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      Rating
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-300 font-medium">
+                      Date
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination */}
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-gray-600">
-              Showing {reviews.length} of {pagination.totalReviews} reviews
+                </thead>
+                <tbody>
+                  {reviews.map((review) => (
+                    <tr key={review._id} className="border-b border-blue-900/30 hover:bg-blue-900/20 transition-colors">
+                      <td className="px-4 py-3 text-gray-200">
+                        {review.user ? `${review.user.FirstName} ${review.user.LastName}` : 'N/A'}
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">
+                        {review.cricksal?.name || 'N/A'}
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">
+                        {review.cricksal?.location || 'N/A'}
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">
+                        <div className="max-w-xs truncate">
+                          {review.comment || 'No comment'}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">
+                        <div className="flex items-center">
+                          <span className="text-yellow-400 mr-1">★</span>
+                          {review.rating || 'N/A'}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-gray-200">
+                        {review.createdAt
+                          ? new Date(review.createdAt).toLocaleDateString()
+                          : 'N/A'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="flex space-x-2">
-              <button
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
-                onClick={() => handlePageChange(pagination.currentPage - 1)}
-                disabled={pagination.currentPage === 1}
-              >
-                Previous
-              </button>
-              <span className="px-4 py-2 text-gray-700">
-                Page {pagination.currentPage} of {pagination.totalPages}
-              </span>
-              <button
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
-                onClick={() => handlePageChange(pagination.currentPage + 1)}
-                disabled={pagination.currentPage === pagination.totalPages}
-              >
-                Next
-              </button>
+
+            {/* Pagination */}
+            <div className="flex justify-between items-center mt-6 pt-4 border-t border-blue-900/30">
+              <div className="text-sm text-gray-300">
+                Showing {reviews.length} of {pagination.totalReviews} reviews
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  className="px-4 py-2 bg-black/50 border border-blue-900/50 text-gray-300 rounded-lg hover:bg-blue-900/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => handlePageChange(pagination.currentPage - 1)}
+                  disabled={pagination.currentPage === 1}
+                >
+                  Previous
+                </button>
+                <span className="px-4 py-2 text-gray-300 flex items-center">
+                  Page {pagination.currentPage} of {pagination.totalPages}
+                </span>
+                <button
+                  className="px-4 py-2 bg-black/50 border border-blue-900/50 text-gray-300 rounded-lg hover:bg-blue-900/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => handlePageChange(pagination.currentPage + 1)}
+                  disabled={pagination.currentPage === pagination.totalPages}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </>
