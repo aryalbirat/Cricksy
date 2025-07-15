@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.docker
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/Cricksy
+    restart: unless-stopped
+    volumes:
+      - ./Backend/uploads:/app/uploads
+    depends_on:
+      - mongo
+    networks:
+      - cricksal-network
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://54.164.187.32/api
+      - NODE_ENV=production
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - cricksal-network
+
+  mongo:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=Cricksy
+    restart: unless-stopped
+    networks:
+      - cricksal-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+    networks:
+      - cricksal-network
+
+volumes:
+  mongo-data:
+
+networks:
+  cricksal-network:
+    driver: bridge
