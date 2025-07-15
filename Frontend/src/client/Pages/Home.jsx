@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaMapMarkerAlt, FaStar, FaEye } from "react-icons/fa";
@@ -10,7 +9,6 @@ import Hero from "../components/Hero";
 const Home = () => {
   const [cricksals, setCricksals] = useState([]);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchCricksals = async () => {
@@ -27,8 +25,29 @@ const Home = () => {
     fetchCricksals();
   }, []);
 
+  // Helper function to render rating display
+  const renderRating = (avgRating, reviewCount) => {
+    if (reviewCount === 0 || avgRating === "No ratings") {
+      return (
+        <div className="flex items-center text-sm text-slate-400">
+          <FaStar className="text-gray-500 mr-1" />
+          <span className="font-medium">No ratings</span>
+          <span className="text-slate-600 ml-1">(0 reviews)</span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex items-center text-sm text-slate-400">
+        <FaStar className="text-yellow-400 mr-1" />
+        <span className="font-medium">{avgRating}</span>
+        <span className="text-slate-600 ml-1">({reviewCount} review{reviewCount !== 1 ? 's' : ''})</span>
+      </div>
+    );
+  };
+
   return (
- <div className="bg-gradient-to-r from-black from-10% via-slate-950 via-50% to-blue-950 to-100% min-h-screen">
+    <div className="bg-gradient-to-r from-black from-10% via-slate-950 via-50% to-blue-950 to-100% min-h-screen">
       <Hero />
       
       {/* Featured Cricksals */}
@@ -124,18 +143,17 @@ const Home = () => {
                     </p>
                   </div>
 
-                  {/* Ratings & Reviews */}
+                  {/* Ratings & Reviews - Using actual data */}
                   <div className="flex justify-between items-center">
-                    <div className="flex items-center text-sm text-slate-400">
-                      <FaStar className="text-yellow-400 mr-1" />
-                      <span className="font-medium">4.5</span>
-                      <span className="text-slate-600 ml-1">(120 reviews)</span>
-                    </div>
+                    {renderRating(cricksal.avgRating, cricksal.reviewCount)}
                     <motion.button
                       className="text-blue-400 hover:text-blue-300 font-semibold text-sm flex items-center gap-1"
                       whileHover={{ scale: 1.05, x: 5 }}
                       transition={{ duration: 0.2 }}
-                       onClick={() => navigate(`/cricksal/${cricksal._id}`)}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click when button is clicked
+                        navigate(`/cricksal/${cricksal._id}`);
+                      }}
                     >
                       Book Now →
                     </motion.button>
@@ -190,6 +208,5 @@ const Home = () => {
     </div>
   );
 };
-
 
 export default Home;

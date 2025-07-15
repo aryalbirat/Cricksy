@@ -18,11 +18,12 @@ const reviewRoutes = require("./routes/review.js")
 const fileUpload = require("express-fileupload")
 const cors = require("cors");
 const { startBookingStatusUpdater } = require('./controller/booking.js');
+const healthRoutes = require('./routes/health');
 
 
 app.use(express.json());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
   credentials: true
 }));
 app.use(fileUpload({
@@ -51,6 +52,7 @@ app.use(bookingRoutes)
 app.use(AllUserRoutes);
 app.use(profilesRoutes);
 app.use(reviewRoutes);
+app.use('/api', healthRoutes);
 
 startBookingStatusUpdater();
 

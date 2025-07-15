@@ -1,7 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, DollarSign, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.85) 30%, rgba(15, 23, 42, 0.95) 70%, rgba(0, 0, 0, 0.98) 110%), url('https://images.pexels.com/photos/31739439/pexels-photo-31739439.jpeg')`
+          backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.85) 30%, rgba(15, 23, 42, 0.95) 70%, rgba(0, 0, 0, 0.98) 110%), url( https://www.pexels.com/photo/photo-of-thunderstorm-2531709/)`
         }}
       />
 
@@ -100,56 +99,25 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Feature Cards */}
+          {/* Right Column - Cricksalcourt Image */}
           <motion.div
-            className="space-y-4"
+            className="flex justify-center items-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {[
-              {
-                icon: <Zap className="w-6 h-6" />,
-                title: "Instant Booking",
-                description: "Book your favorite courts in seconds with our streamlined process",
-                color: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: <DollarSign className="w-6 h-6" />,
-                title: "Best Prices",
-                description: "Competitive rates and exclusive deals for premium facilities",
-                color: "from-emerald-500 to-teal-500"
-              },
-              {
-                icon: <Shield className="w-6 h-6" />,
-                title: "24/7 Support",
-                description: "Round-the-clock assistance for all your booking needs",
-                color: "from-purple-500 to-indigo-500"
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="group bg-slate-900/30 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:bg-slate-800/40 transition-all duration-300 cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg bg-gradient-to-r ${feature.color} text-white shadow-lg`}>
-                    {feature.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 mt-1 group-hover:text-gray-300 transition-colors">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            <motion.div
+              className="relative max-w-md w-full"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur-xl"></div>
+              <img
+                src="/cricksal.png"
+                alt="Cricksal Court"
+                className="relative z-10 w-full h-auto rounded-xl shadow-2xl border border-blue-500/30"
+              />
+            </motion.div>
           </motion.div>
         </div>
 
