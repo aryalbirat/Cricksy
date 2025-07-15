@@ -1,3 +1,4 @@
+
 import AdminSidebar from '../components/AdminSidebar'
 import { Route, Routes } from 'react-router-dom';
 import AdminDashboard from '../components/AdminDashboard';
@@ -28,5 +29,4 @@ const AdminHome = () => {
         </div>
   )
 }
-
 export default AdminHome

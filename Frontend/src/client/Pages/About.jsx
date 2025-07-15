@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import { Users, Target } from "lucide-react";
-import img1 from "../../image/3.jpg"; 
-import img2 from "../../image/2.jpg"; 
+import { Users, Target, Award } from "lucide-react";
 
 const About = () => {
   return (
@@ -12,7 +10,7 @@ const About = () => {
       <section
         className="relative bg-cover bg-center h-[70vh] flex items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.8) 50%, rgba(15, 23, 42, 0.9) 100%), url(${img1})`,
+          backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.8) 50%, rgba(15, 23, 42, 0.9) 100%), url('https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')`,
         }}
       >
         <div className="absolute inset-0">
@@ -53,7 +51,7 @@ const About = () => {
           >
             About{" "}
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">
-              Cricksy
+              CricksalHub
             </span>
           </motion.h1>
           <motion.p 
@@ -82,7 +80,7 @@ const About = () => {
                   Our <span className="text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">Story</span>
                 </h2>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  Born from a passion for cricket and the frustration of finding quality courts, Cricksy was created to bridge the gap between players and premium facilities.
+                  Born from a passion for cricket and the frustration of finding quality courts, CricksalHub was created to bridge the gap between players and premium facilities.
                 </p>
                 <p className="text-gray-400 leading-relaxed">
                   We believe every cricket enthusiast deserves access to world-class facilities without the hassle of endless phone calls and uncertainty. Our platform connects you with verified, top-tier cricket courts, making your booking experience as smooth as a perfect cover drive.
@@ -109,21 +107,21 @@ const About = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={img2}
+                  src="https://images.pexels.com/photos/1661950/pexels-photo-1661950.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
                   alt="Cricket players in action"
                   className="w-full h-96 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
               </div>
               
-              {/* Floating stats card
+              {/* Floating stats card */}
               <motion.div
                 className="absolute -bottom-8 -left-8 bg-slate-800/90 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 shadow-xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }} */}
-              
-                {/* <div className="flex items-center gap-4">
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
@@ -131,8 +129,8 @@ const About = () => {
                     <div className="text-2xl font-bold text-white">10K+</div>
                     <div className="text-sm text-gray-400">Happy Players</div>
                   </div>
-                </div> */}
-              {/* </motion.div> */}
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
