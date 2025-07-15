@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';

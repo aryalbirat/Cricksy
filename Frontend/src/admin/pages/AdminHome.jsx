@@ -15,7 +15,6 @@ const AdminHome = () => {
             <div className="w-64">
                 <AdminSidebar />
             </div>
-
             <div className="flex-1 overflow-auto">
                 {/* <h1 className="text-3xl font-bold text-gradient bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent mb-6">Admin Dashboard</h1> */}
                 <Routes>
