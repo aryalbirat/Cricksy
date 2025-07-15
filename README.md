@@ -1,61 +1,112 @@
-# 🏟️ Cricksy: A Cricksal Booking System
+# 🏟️ Cricksy: Futsal Court Booking System
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/trwb_8GS)
 
 **Cloud Project - Group 23**
 
-A comprehensive full-stack web application for booking futsal courts with integrated payment processing, user management, and venue management capabilities.
+A comprehensive full-stack web application for booking futsal courts, built with React.js and Node.js. The platform enables users to discover, book, and manage futsal court reservations while providing separate dashboards for owners and administrators.
 
-## 🌟 Features
+## ✨ Key Features
 
-### 🎯 Core Functionality
-- **Court Booking System**: Real-time booking with time slot management
-- **Payment Integration**: Secure payments via Khalti payment gateway
-- **Multi-Role Support**: Separate dashboards for Users, Owners, and Admins
-- **Review System**: Rate and review futsal courts
-- **Search & Filter**: Find courts by location, price, and availability
+### 🔐 Authentication & Authorization
+- **JWT-based Authentication** with secure token handling
+- **Role-based Access Control** (User, Owner, Admin)
+- **User Registration & Login** with email validation
+- **Password Security** using bcrypt hashing
+- **Profile Management** with image upload capability
+- **Role Upgrade System** (User to Owner)
 
-### 👥 User Roles
-- **Regular Users**: Browse, book, and review futsal courts
-- **Court Owners**: Manage their venues, view bookings, and handle court details
-- **Administrators**: System-wide management and oversight
+### 🏟️ Court Management
+- **Court Discovery** with advanced search and filtering
+- **Location-based Search** with price range filters
+- **Sort by Price** (ascending/descending)
+- **Detailed Court View** with multiple image galleries
+- **Owner Court CRUD** operations (Create, Read, Update, Delete)
+- **Admin Court Oversight** across all owners
 
-### 💳 Payment Features
-- Integrated Khalti payment gateway
-- Secure transaction processing
-- Payment verification and confirmation
-- Booking status management
+### 📅 Advanced Booking System
+- **Real-time Availability** checking with conflict prevention
+- **Date & Time Slot Selection** with validation
+- **Booking Status Tracking** (upcoming, completed, cancelled)
+- **Automatic Status Updates** based on current time
+- **Booking History Management** for users
+- **Owner Booking Analytics** for revenue tracking
+- **Admin Booking Management** with edit/delete capabilities
 
-## 🏗️ Architecture
+### ⭐ Review & Rating System
+- **5-Star Rating System** for courts
+- **Written Reviews** with 500-character limit
+- **Verified Reviews** (only from users with completed bookings)
+- **Average Rating Calculation** automatically updated
+- **Review Management** for owners and admins
+- **Search Reviews** by user or court name
 
-### Frontend (React + Vite)
-- **React 18** with modern hooks and functional components
-- **Redux Toolkit** for state management
-- **React Router** for navigation
-- **Tailwind CSS** for responsive styling
-- **Framer Motion** for animations
-- **Vite** for fast development and building
+### 👥 Multi-Dashboard System
 
-### Backend (Node.js + Express)
-- **Express.js** REST API
-- **MongoDB** with Mongoose ODM
-- **JWT** authentication
-- **Bcrypt** for password hashing
-- **Joi** for data validation
-- **Express-fileupload** for image handling
+#### **User Dashboard**
+- Personal profile management with image upload
+- Complete booking history with status tracking
+- Court search and discovery
+- Review submission for completed bookings
+- Account settings and password management
 
-## 🚀 Quick Start
+#### **Owner Dashboard**
+- Court management (add, edit, delete courts)
+- Booking overview for all owned courts
+- Review monitoring with search and filter
+- Revenue analytics and booking statistics
+- Profile management with owner-specific fields
+
+#### **Admin Dashboard**
+- Complete system oversight and control
+- User management with role assignment
+- Court management across all owners
+- Booking management with full edit/delete access
+- Review monitoring and moderation
+- System analytics and reporting
+- Dark theme with modern gradient design
+
+## 🛠️ Technology Stack
+
+### Frontend Technologies
+- **React 18** - Modern React with Hooks and functional components
+- **Redux Toolkit** - State management with RTK Query
+- **React Router DOM** - Client-side routing with protected routes
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Animation library for smooth transitions
+- **Axios** - HTTP client for API communication
+- **React Toastify** - Toast notifications
+- **Lucide React & React Icons** - Icon libraries
+- **JWT Decode** - JWT token handling
+- **Date-fns** - Date manipulation library
+- **Vite** - Fast build tool and development server
+
+### Backend Technologies
+- **Node.js** - JavaScript runtime environment
+- **Express.js** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Token authentication
+- **Bcrypt** - Password hashing
+- **Joi** - Data validation
+- **Express File Upload** - File upload handling
+- **CORS** - Cross-origin resource sharing
+- **Moment.js & Date-fns** - Date/time manipulation
+- **Dotenv** - Environment variable management
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (local or cloud instance)
-- Git
+- **Node.js** (v14.0.0 or higher)
+- **MongoDB** (local installation or MongoDB Atlas)
+- **Git** for version control
+- **npm** or **yarn** package manager
 
-### Installation
+### Installation Steps
 
-1. **Clone the repository**
+1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-repo/project-work-group-23.git
+   git clone <repository-url>
    cd project-work-group-23
    ```
 
@@ -67,7 +118,7 @@ A comprehensive full-stack web application for booking futsal courts with integr
 
 3. **Frontend Setup**
    ```bash
-   cd Frontend
+   cd ../Frontend
    npm install
    ```
 
@@ -75,41 +126,59 @@ A comprehensive full-stack web application for booking futsal courts with integr
 
 Create a `.env` file in the Backend directory:
 ```env
-# Database
-MONGODB_URI=mongodb://127.0.0.1:27017/CricksalHub
+# Database Configuration
+MONGODB_URI=mongodb://127.0.0.1:27017/Cricksy
 
-# JWT Secret
-JWT_SECRET=your_jwt_secret_here
-
-# Khalti Payment Gateway
-KHALTI_SECRET_KEY=your_khalti_secret_key
-KHALTI_URL=https://dev.khalti.com/api/v2/epayment/initiate/
+# JWT Configuration
+JWT_SECRET=your_super_secret_jwt_key_here
 
 # Server Configuration
 PORT=8000
 NODE_ENV=development
+
+# File Upload Configuration
+MAX_FILE_SIZE=5000000
+UPLOAD_PATH=./uploads
 ```
+
+### Database Setup
+
+1. **Start MongoDB Service**
+   ```bash
+   # For local MongoDB
+   mongod
+   
+   # Or use MongoDB Atlas cloud connection
+   # Update MONGODB_URI in .env file
+   ```
+
+2. **Create Admin User**
+   ```bash
+   cd Backend
+   node createAdmin.js
+   ```
 
 ### Running the Application
 
-1. **Start MongoDB** (if running locally)
-   ```bash
-   mongod
-   ```
-
-2. **Start Backend Server**
+1. **Start Backend Server**
    ```bash
    cd Backend
-   npm run dev
+   npm run dev    # Development mode with nodemon
+   # or
+   npm start      # Production mode
    ```
-   Server runs on `http://localhost:8000`
+   🌐 Backend runs on `http://localhost:8000`
 
-3. **Start Frontend Development Server**
+2. **Start Frontend Development Server**
    ```bash
    cd Frontend
    npm run dev
    ```
-   Frontend runs on `http://localhost:5173`
+   🌐 Frontend runs on `http://localhost:5173`
+
+### Default Admin Credentials
+- **Email:** `admin@cricksy.com`
+- **Password:** `11111111`
 
 ## 📁 Project Structure
 
