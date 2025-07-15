@@ -4,9 +4,7 @@ import {
   FaUserGroup,
   FaUsers,
   FaFutbol,
-  FaMoneyBillWave,
   FaStar,
-  FaChartBar,
   FaArrowRightFromBracket
 } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -20,55 +18,55 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div className="w-64 h-screen bg-dark-950/95 backdrop-blur-xl shadow-2xl flex flex-col p-6 fixed top-0 left-0 overflow-y-auto border-r border-dark-800/50">
-      <h2 className="text-2xl font-bold text-gradient bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent mb-8">Admin Panel</h2>
+    <div className="w-64 h-screen bg-gradient-to-b from-gray-800 to-gray-900 shadow-lg flex flex-col p-6 fixed top-0 left-0 overflow-y-auto border-r border-gray-700">
+      <h2 className="text-2xl font-bold text-gradient bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent mb-8">Admin Panel</h2>
       <nav className="flex-1">
         <ul>
           <li className="mb-3">
             <Link
               to="/"
-              className="sidebar-link"
+              className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              <FaGauge className="text-primary-400" /> Dashboard
+              <FaGauge className="text-blue-400" /> Dashboard
             </Link>
           </li>
           <li className="mb-3">
             <Link
               to="/admin/users"
-              className="sidebar-link"
+              className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              <FaUserGroup className="text-primary-400" /> Users
+              <FaUserGroup className="text-blue-400" /> Users
             </Link>
           </li>
           <li className="mb-3">
             <Link
               to="/admin/arenas"
-              className="sidebar-link"
+              className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              <FaUsers className="text-primary-400" /> Arenas
+              <FaUsers className="text-blue-400" /> Arenas
             </Link>
           </li>
           <li className="mb-3">
             <Link
               to="/admin/bookings"
-              className="sidebar-link"
+              className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              <FaFutbol className="text-primary-400" /> Bookings
+              <FaFutbol className="text-blue-400" /> Bookings
             </Link>
           </li>
           <li className="mb-3">
             <Link
               to="/admin/reviews"
-              className="sidebar-link"
+              className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
-              <FaStar className="text-primary-400" /> Reviews
+              <FaStar className="text-blue-400" /> Reviews
             </Link>
           </li>
         </ul>
       </nav>
       <button
         onClick={handleLogout}
-        className="mt-auto flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-danger-600 to-danger-700 text-white hover:from-danger-700 hover:to-danger-800 transition-all duration-300 shadow-lg hover:shadow-danger-500/25"
+        className="mt-auto flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-md hover:shadow-red-500/50"
       >
         <FaArrowRightFromBracket /> Logout
       </button>
