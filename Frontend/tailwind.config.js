@@ -7,14 +7,14 @@ export default {
         sans: ['Poppins', 'sans-serif'], 
       },
       colors: {
-        // Modern dark bluish theme
+       
         primary: {
           50: '#e6f3ff',
           100: '#cce7ff',
           200: '#99cfff',
           300: '#66b7ff',
           400: '#339fff',
-          500: '#0087ff', // Main vibrant blue
+          500: '#0087ff', 
           600: '#0066cc',
           700: '#004499',
           800: '#003366',

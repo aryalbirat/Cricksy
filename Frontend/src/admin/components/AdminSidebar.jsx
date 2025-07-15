@@ -52,6 +52,7 @@ const AdminSidebar = () => {
               to="/admin/bookings"
               className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
             >
+              
               <FaFutbol className="text-blue-400" /> Bookings
             </Link>
           </li>
@@ -74,5 +75,6 @@ const AdminSidebar = () => {
     </div>
   );
 };
+
 
 export default AdminSidebar;

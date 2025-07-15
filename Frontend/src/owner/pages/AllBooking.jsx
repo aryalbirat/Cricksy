@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
+//allbookings component
 const AllBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [pagination, setPagination] = useState({

@@ -396,6 +396,7 @@ const Bookings = () => {
               <div className="text-sm text-gray-300">
                 Showing {bookings.length} of {pagination.totalBookings} bookings
               </div>
+              
               <div className="flex space-x-2">
                 <button
                   className="px-4 py-2 bg-black/50 border border-blue-900/50 text-gray-300 rounded-lg hover:bg-blue-900/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

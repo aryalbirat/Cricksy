@@ -198,6 +198,7 @@ const ManageCricksal = () => {
             </div>
           </div>
         </div>
+        
       )}
     </div>
   );

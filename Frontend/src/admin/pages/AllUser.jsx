@@ -10,6 +10,7 @@ const AllUsersForAdmin = () => {
     totalPages: 1,
     limit: 5,
   });
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
