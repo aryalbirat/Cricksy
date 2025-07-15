@@ -1,5 +1,4 @@
-# Multi-stage build for production frontend
-FROM node:18-alpine AS builder
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -7,29 +6,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy application code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Expose port for Vite dev server
+EXPOSE 3000
 
-# Production stage - use nginx to serve static files
-FROM nginx:alpine AS production
-
-# Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy custom nginx config for SPA routing
-COPY nginx-frontend.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80 (nginx default)
-EXPOSE 80
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost || exit 1
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start development server
+CMD ["npm", "run", "dev"]
