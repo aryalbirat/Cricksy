@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./Backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Backend:/app
+      - /app/node_modules  # Prevent node_modules from being overridden
+    env_file:
+      - .env.docker
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://host.docker.internal:27017/Cricksy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules  # Prevent node_modules from being overridden
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+# Removed mongo service - using localhost MongoDB instead
+
+#volumes:
+#  mongo-data:
