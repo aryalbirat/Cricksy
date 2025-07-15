@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaClock, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const MyBooking = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const MyBooking = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/booking", {
+      const response = await axios.get(`${API_BASE_URL}/api/booking`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -46,7 +47,7 @@ const MyBooking = () => {
   const handleCancel = async (bookingId) => {
     if (!window.confirm("Are you sure you want to cancel this booking?")) return;
     try {
-      await axios.patch(`http://localhost:8000/api/booking/cancel/${bookingId}`, {}, {
+      await axios.patch(`${API_BASE_URL}/api/booking/cancel/${bookingId}`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -75,7 +76,7 @@ const MyBooking = () => {
           <img
             src={
               booking.cricksalArena?.images?.[0]
-                ? `http://localhost:8000/${booking.cricksalArena.images[0]}`
+                ? getImageUrl(booking.cricksalArena.images[0])
                 : "/default-cricksal.jpg"
             }
             alt={booking.cricksalArena?.name || "Cricksal Arena"}

@@ -6,7 +6,7 @@ import { updateUser } from "../../features/user/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const UserProfile = () => {
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/profile", {
+        const res = await axios.get(`${API_BASE_URL}/api/profile`, {
           headers: { Authorization: token },
         });
         const u = res.data.user;
@@ -63,7 +63,7 @@ const UserProfile = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        "http://localhost:8000/api/update/profile",
+        `${API_BASE_URL}/api/update/profile`,
         formData,
         { headers: { Authorization: token } }
       );
@@ -88,7 +88,7 @@ const UserProfile = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/profile/image",
+        `${API_BASE_URL}/api/profile/image`,
         form,
         {
           headers: {
@@ -140,7 +140,7 @@ const UserProfile = () => {
             <div className="text-center">
               <div className="relative mx-auto w-32 h-32 mb-4">
                 <img
-                  src={`http://localhost:8000/${user.profileImage}`}
+                  src={getImageUrl(user.profileImage)}
                   className="w-full h-full object-cover rounded-full border-4 border-primary/30 shadow-lg"
                 />
               </div>

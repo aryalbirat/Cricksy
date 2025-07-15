@@ -5,6 +5,7 @@ import { FaStar, FaMapMarkerAlt, FaSearch, FaFilter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
+import { API_BASE_URL } from "../../config/api";
 
 const FindCricksalCourts = () => {
   const [cricksals, setCricksals] = useState([]);
@@ -23,7 +24,7 @@ const FindCricksalCourts = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://localhost:8000/api/cricksal", {
+      const response = await axios.get(`${API_BASE_URL}/api/cricksal`, {
         params: {
           searchTerm,
           location,
@@ -231,7 +232,7 @@ const FindCricksalCourts = () => {
                       <div className="w-full h-48 bg-black flex items-center justify-center relative">
                         {cricksal.images?.length > 0 ? (
                           <img
-                            src={"http://localhost:8000/" + cricksal.images[0]}
+                            src={`${API_BASE_URL}/${cricksal.images[0]}`}
                             alt={cricksal.name}
                             className="w-full h-full object-cover"
                           />

@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { API_BASE_URL } from "../../config/api";
 
 const Review = ({ reviews, setReviews, cricksalId, setError, onReviewAdded }) => {
   const [newComment, setNewComment] = useState("");
@@ -12,7 +13,7 @@ const Review = ({ reviews, setReviews, cricksalId, setError, onReviewAdded }) =>
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/cricksal/${cricksalId}/reviews`);
+        const response = await axios.get(`${API_BASE_URL}/api/cricksal/${cricksalId}/reviews`);
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -35,7 +36,7 @@ const Review = ({ reviews, setReviews, cricksalId, setError, onReviewAdded }) =>
       }
 
       const response = await axios.post(
-        `http://localhost:8000/api/create/cricksal/${cricksalId}/review`,
+        `${API_BASE_URL}/api/create/cricksal/${cricksalId}/review`,
         { comment: newComment, rating: newRating },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -44,7 +45,7 @@ const Review = ({ reviews, setReviews, cricksalId, setError, onReviewAdded }) =>
         setNewComment("");
         setNewRating(1);
         setError("");
-        const updatedReviews = await axios.get(`http://localhost:8000/api/cricksal/${cricksalId}/reviews`);
+        const updatedReviews = await axios.get(`${API_BASE_URL}/api/cricksal/${cricksalId}/reviews`);
         setReviews(updatedReviews.data);
         onReviewAdded();
       }

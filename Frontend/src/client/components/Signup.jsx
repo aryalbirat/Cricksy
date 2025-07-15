@@ -5,6 +5,7 @@ import cricksalimage from "../../image/4.jpg";
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLock, FaUserShield } from "react-icons/fa";
+import { API_BASE_URL } from "../../config/api";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/signup", {
+      const response = await axios.post(`${API_BASE_URL}/api/signup`, {
         FirstName: formData.FirstName,
         LastName: formData.LastName,
         Email: formData.Email,

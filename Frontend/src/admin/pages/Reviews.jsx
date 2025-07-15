@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from "../../config/api";
 import axios from 'axios';
 
 const Reviews = () => {
@@ -29,7 +30,7 @@ const Reviews = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/admin/reviews', {
+      const response = await axios.get('${API_BASE_URL}/api/admin/reviews', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

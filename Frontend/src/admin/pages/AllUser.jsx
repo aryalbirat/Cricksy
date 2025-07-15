@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
+import { API_BASE_URL } from "../../config/api";
 import axios from 'axios';
 
 const AllUsersForAdmin = () => {
@@ -31,7 +32,7 @@ const AllUsersForAdmin = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/admin/allusers', {
+      const response = await axios.get('${API_BASE_URL}/api/admin/allusers', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

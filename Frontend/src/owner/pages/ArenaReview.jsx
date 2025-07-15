@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../config/api";
 
 // ArenaReview 
 const ArenaReview = () => {
@@ -29,7 +30,7 @@ const ArenaReview = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/api/owner/reviews", {
+      const response = await axios.get(`${API_BASE_URL}/api/owner/reviews`, {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           search,

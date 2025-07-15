@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const OwnerCricksal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,7 @@ const OwnerCricksal = () => {
 
   const fetchCricksals = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/cricksals/owner', {
+      const response = await axios.get(`${API_BASE_URL}/api/cricksals/owner`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       if (response.status === 200) {
@@ -81,7 +82,7 @@ const OwnerCricksal = () => {
       let res;
       if (isEditing && editCricksal) {
         res = await axios.put(
-          `http://localhost:8000/api/owner/cricksal/${editCricksal._id}`,
+          `${API_BASE_URL}/api/owner/cricksal/${editCricksal._id}`,
           form,
           {
             headers: {
@@ -92,7 +93,7 @@ const OwnerCricksal = () => {
         );
       } else {
         res = await axios.post(
-          'http://localhost:8000/api/owner/cricksal',
+          `${API_BASE_URL}/api/owner/cricksal`,
           form,
           {
             headers: {
@@ -143,7 +144,7 @@ const OwnerCricksal = () => {
     setCricksals((prev) => prev.filter((i) => i._id !== c._id));
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/owner/cricksal/${c._id}`,
+        `${API_BASE_URL}/api/owner/cricksal/${c._id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         }
@@ -211,7 +212,7 @@ const OwnerCricksal = () => {
                   <td className="px-6 py-4">
                     {c.images && c.images.length ? (
                       <img
-                        src={`http://localhost:8000/${c.images[0]}`}
+                        src={getImageUrl(c.images[0])}
                         alt="cricksal"
                         className="h-14 w-14 object-cover rounded"
                       />
@@ -320,7 +321,7 @@ const OwnerCricksal = () => {
                       {newCricksal.existingImages.map((img, idx) => (
                         <div key={idx} className="relative">
                           <img
-                            src={`http://localhost:8000/${img}`}
+                            src={getImageUrl(img)}
                             alt={`existing-${idx}`}
                             className="h-14 w-14 rounded object-cover"
                           />

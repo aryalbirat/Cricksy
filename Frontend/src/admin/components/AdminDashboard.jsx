@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from "../../config/api";
 import axios from 'axios';
 import { FaUsers, FaFutbol, FaStar, FaCalendarCheck } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -23,10 +24,10 @@ const AdminDashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         const [usersRes, cricksalsRes, bookingsRes, reviewsRes] = await Promise.all([
-          axios.get('http://localhost:8000/api/admin/allusers', config).catch(() => ({ data: { users: [] } })),
-          axios.get('http://localhost:8000/api/cricksals', config).catch(() => ({ data: { cricksals: [] } })),
-          axios.get('http://localhost:8000/api/admin/bookings', config).catch(() => ({ data: { bookings: [] } })),
-          axios.get('http://localhost:8000/api/admin/reviews', config).catch(() => ({ data: { reviews: [] } })),
+          axios.get('${API_BASE_URL}/api/admin/allusers', config).catch(() => ({ data: { users: [] } })),
+          axios.get('${API_BASE_URL}/api/cricksals', config).catch(() => ({ data: { cricksals: [] } })),
+          axios.get('${API_BASE_URL}/api/admin/bookings', config).catch(() => ({ data: { bookings: [] } })),
+          axios.get('${API_BASE_URL}/api/admin/reviews', config).catch(() => ({ data: { reviews: [] } })),
         ]);
 
         setDashboardData({
@@ -241,10 +242,10 @@ const AdminDashboard = () => {
 //         const config = { headers: { Authorization: `Bearer ${token}` } };
 
 //         const [usersRes, cricksalsRes, bookingsRes, reviewsRes] = await Promise.all([
-//           axios.get('http://localhost:8000/api/admin/allusers', config).catch(() => ({ data: { users: [] } })),
-//           axios.get('http://localhost:8000/api/cricksals', config).catch(() => ({ data: { cricksals: [] } })),
-//           axios.get('http://localhost:8000/api/admin/bookings', config).catch(() => ({ data: { bookings: [] } })),
-//           axios.get('http://localhost:8000/api/admin/reviews', config).catch(() => ({ data: { reviews: [] } })),
+//           axios.get('${API_BASE_URL}/api/admin/allusers', config).catch(() => ({ data: { users: [] } })),
+//           axios.get('${API_BASE_URL}/api/cricksals', config).catch(() => ({ data: { cricksals: [] } })),
+//           axios.get('${API_BASE_URL}/api/admin/bookings', config).catch(() => ({ data: { bookings: [] } })),
+//           axios.get('${API_BASE_URL}/api/admin/reviews', config).catch(() => ({ data: { reviews: [] } })),
 //         ]);
 
 //         setDashboardData({

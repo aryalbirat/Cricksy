@@ -5,6 +5,7 @@ import { FaMapMarkerAlt, FaStar, FaEye } from "react-icons/fa";
 import { motion } from "framer-motion";
 // import Footer from "../components/Footer";
 import Hero from "../components/Hero";
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const Home = () => {
   const [cricksals, setCricksals] = useState([]);
@@ -13,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchCricksals = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/cricksal");
+        const response = await axios.get(`${API_BASE_URL}/api/cricksal`);
         if (response.status === 200) {
           setCricksals(response.data.cricksals);
         }
@@ -95,7 +96,7 @@ const Home = () => {
                 <div className="relative w-full h-56 bg-slate-800 overflow-hidden">
                   {cricksal.images?.length > 0 ? (
                     <img
-                      src={"http://localhost:8000/" + cricksal.images[0]}
+                      src={getImageUrl(cricksal.images[0])}
                       alt={cricksal.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />

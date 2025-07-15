@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
+import { API_BASE_URL } from "../../config/api";
 import axios from 'axios';
 import { FaEdit, FaTrashAlt, FaTimes, FaSave } from 'react-icons/fa';
 
@@ -38,7 +39,7 @@ const Bookings = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/admin/bookings', {
+      const response = await axios.get('${API_BASE_URL}/api/admin/bookings', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -91,7 +92,7 @@ const Bookings = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:8000/api/bookings/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/bookings/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -134,7 +135,7 @@ const Bookings = () => {
 
   const updateBooking = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:8000/api/bookings/${id}`, editForm, {
+      const response = await axios.put(`${API_BASE_URL}/api/bookings/${id}`, editForm, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

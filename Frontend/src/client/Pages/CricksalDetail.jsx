@@ -7,6 +7,7 @@ import { FaMapMarkerAlt, FaStar, FaArrowLeft, FaPhone, FaEnvelope } from "react-
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 import Review from "../components/Review";
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const CricksalDetail = () => {
   const { id } = useParams();
@@ -20,8 +21,8 @@ const CricksalDetail = () => {
   const fetchCricksalData = useCallback(async () => {
     try {
       const [cricksalResponse, reviewsResponse] = await Promise.all([
-        axios.get(`http://localhost:8000/api/cricksal/${id}`),
-        axios.get(`http://localhost:8000/api/cricksal/${id}/reviews`),
+        axios.get(`${API_BASE_URL}/api/cricksal/${id}`),
+        axios.get(`${API_BASE_URL}/api/cricksal/${id}/reviews`),
       ]);
       console.log("Fetched cricksal:", cricksalResponse.data); // Debug log
       console.log("Fetched reviews:", reviewsResponse.data); // Debug
@@ -109,7 +110,7 @@ const CricksalDetail = () => {
             transition={{ duration: 0.6 }}
           >
             <img
-              src={cricksal.images?.[0] ? `http://localhost:8000/${cricksal.images[0]}` : "/placeholder.jpg"}
+              src={getImageUrl(cricksal.images?.[0]) || "/placeholder.jpg"}
               alt={`${cricksal.name} view 1`}
               className="w-full h-[415px] object-cover rounded-lg shadow-2xl"
             />
@@ -139,7 +140,7 @@ const CricksalDetail = () => {
               {[1, 2, 3, 4].map((i) => (
                 <img
                   key={i}
-                  src={cricksal.images?.[i] ? `http://localhost:8000/${cricksal.images[i]}` : "/placeholder.jpg"}
+                  src={getImageUrl(cricksal.images?.[i]) || "/placeholder.jpg"}
                   alt={`${cricksal.name} view ${i + 1}`}
                   className="w-full h-[200px] object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                 />

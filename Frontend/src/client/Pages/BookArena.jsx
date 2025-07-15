@@ -8,6 +8,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { motion } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 
 const BookArena = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const BookArena = () => {
   useEffect(() => {
     const fetchCricksalDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/cricksal/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/cricksal/${id}`);
         if (response.status === 200) {
           setCricksal(response.data);
         }
@@ -43,7 +44,7 @@ const BookArena = () => {
     setFetchError(null);
 
     try {
-      const response = await axios.get("http://localhost:8000/api/available-slots", {
+      const response = await axios.get(`${API_BASE_URL}/api/available-slots`, {
         params: {
           cricksalArena: id,
           bookingDate: date,
@@ -105,7 +106,7 @@ const BookArena = () => {
       const totalAmount = calculateTotalAmount();
 
       const response = await axios.post(
-        `http://localhost:8000/api/book/${id}`,
+        `${API_BASE_URL}/api/book/${id}`,
         {
           cricksalArena: id,
           bookingDate: selectedDate,
@@ -298,7 +299,7 @@ const BookArena = () => {
                 <div className="flex items-center gap-4 mb-4">
                   {cricksal.images?.length > 0 && (
                     <img
-                      src={`http://localhost:8000/${cricksal.images[0]}`}
+                      src={getImageUrl(cricksal.images[0])}
                       alt={cricksal.name}
                       className="w-16 h-16 object-cover rounded-lg"
                     />

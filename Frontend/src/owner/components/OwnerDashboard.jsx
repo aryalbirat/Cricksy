@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from "../../config/api";
 import axios from 'axios';
 import { FaFutbol, FaStar, FaCalendarCheck } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +25,9 @@ const OwnerDashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         const [bookingsRes, reviewsRes, cricksalsRes] = await Promise.all([
-          axios.get('http://localhost:8000/api/owner/bookings', config).catch(() => ({ data: { bookings: [] } })),
-          axios.get('http://localhost:8000/api/owner/reviews', config).catch(() => ({ data: { reviews: [] } })),
-          axios.get('http://localhost:8000/api/cricksals/owner', config).catch(() => ({ data: { cricksals: [] } })),
+          axios.get('${API_BASE_URL}/api/owner/bookings', config).catch(() => ({ data: { bookings: [] } })),
+          axios.get('${API_BASE_URL}/api/owner/reviews', config).catch(() => ({ data: { reviews: [] } })),
+          axios.get('${API_BASE_URL}/api/cricksals/owner', config).catch(() => ({ data: { cricksals: [] } })),
         ]);
 
         setDashboardData({

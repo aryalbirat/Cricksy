@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { API_BASE_URL, getImageUrl } from "../../config/api";
 import axios from 'axios';
 
 const ManageCricksal = () => {
@@ -17,7 +18,7 @@ const ManageCricksal = () => {
   // Fetch cricksals with pagination and search
   const fetchCricksals = async (page = 1) => {
     try {
-      const response = await axios.get('http://localhost:8000/api/cricksals', {
+      const response = await axios.get('${API_BASE_URL}/api/cricksals', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -53,7 +54,7 @@ const ManageCricksal = () => {
   // Handle delete cricksal
   const handleDelete = async (cricksalId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/cricksals/${cricksalId}`, {
+      await axios.delete(`${API_BASE_URL}/api/cricksals/${cricksalId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -145,7 +146,7 @@ const ManageCricksal = () => {
                       <td className="px-4 py-3 text-gray-200">
                         {cricksal.images && cricksal.images.length > 0 ? (
                           <img
-                            src={`http://localhost:8000/${cricksal.images[0]}`}
+                            src={getImageUrl(cricksal.images[0])}
                             alt={`Cricksal ${cricksal.name}`}
                             className="w-16 h-16 object-cover rounded-md shadow-md border border-blue-900/30"
                           />

@@ -7,6 +7,7 @@ import cricksalimage from "../../image/2.jpg";
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { API_BASE_URL } from "../../config/api";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post(`${API_BASE_URL}/api/login`, {
         Email: formData.Email,
         password: formData.password,
       });

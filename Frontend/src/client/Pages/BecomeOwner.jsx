@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../features/user/userSlice"; // Redux action to update user state
 import { motion } from "framer-motion";
 import { FaUser, FaMapMarkerAlt, FaPhone, FaCrown } from "react-icons/fa";
+import { API_BASE_URL } from "../../config/api";
 
 const BecomeOwner = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const BecomeOwner = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/become-owner",
+        `${API_BASE_URL}/api/become-owner`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

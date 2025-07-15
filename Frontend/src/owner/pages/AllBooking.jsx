@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from "../../config/api";
 
 
 //allbookings component
@@ -30,7 +31,7 @@ const AllBooking = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/owner/bookings', {
+      const response = await axios.get(`${API_BASE_URL}/api/owner/bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
