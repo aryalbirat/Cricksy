@@ -110,15 +110,6 @@ graph TD
 - **Scalability:** Horizontally scalable via Docker containers and cloud hosting.
 - **Uptime:** 99.9% (cloud-hosted, monitored)
 - **Cost-Efficiency:** Pay-as-you-go cloud resources, minimal idle costs.
-
----
-
-## 📷 Screenshots / UI Preview
-
-> ![Dashboard Screenshot](screenshots/dashboard.png)
-> ![Booking Page](screenshots/booking.png)
-> ![Admin Panel](screenshots/admin.png)
-
 ---
 
 ## 📁 Repository Structure
