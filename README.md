@@ -12,9 +12,9 @@
 | Name         | Roll Number | Role                |
 |--------------|-------------|---------------------|
 | Birat Aryal  | 221614      | Frontend + Backend  |
-| Sunil Giri   | [Roll No]   | Backend             |
-| Pragyan      | [Roll No]   | Frontend            |
-| Rupesh       | [Roll No]   | Frontend            |
+| Sunil Giri   | 221615      | Backend             |
+| Pragyan      | 221516      | Frontend            |
+| Rupesh       | 221739      | Frontend            |
 
 ---
 
@@ -36,12 +36,13 @@ Cricksy is a cloud-native web application that streamlines the process of discov
 
 - Develop a web application for cricket court booking using cloud services.
 - Implement scalable backend APIs and real-time data updates.
-- Ensure security, performance, and reliability through cloud best practices.
-- Demonstrate integration with cloud platforms (e.g., AWS, Azure, or GCP) for hosting, storage, and CI/CD.
+- Integrate secure user authentication and role-based access control.
+- Enable admin dashboard functionalities for managing courts, bookings, and users.
 
 ---
 
-## 🏗️ System Architecture
+
+## 🗂️ System Architecture Diagram
 
 ```mermaid
 graph TD
@@ -53,21 +54,22 @@ graph TD
   E --> D
   F[Nginx Reverse Proxy] --> B
   F --> C
-  C --> E[Cloud Storage (for images)]
-  C --> F[Cloud Hosting (e.g., AWS EC2/Elastic Beanstalk)]
+  C --> G[Cloud Storage: Images]
+  C --> H[Cloud Hosting: AWS EC2 or Elastic Beanstalk]
 ```
 
-- **Frontend:** React (Vite, Redux, Tailwind)
-- **Backend:** Node.js, Express.js, JWT, Multer
-- **Database:** MongoDB (Mongoose)
-- **Cloud Services:** AWS EC2/S3 (or similar for hosting and storage)
+- **Frontend**: React (Vite, Redux, Tailwind)  
+- **Backend**: Node.js, Express.js, JWT, Multer  
+- **Database**: MongoDB (Mongoose)  
+- **Cloud Services**: AWS EC2/S3 (or similar for hosting and storage)
+
 
 ---
 
 ## 🔧 Technologies & Tools Used
 
 ### ☁️ Cloud Platform
-- AWS EC2 (for deployment), S3 (for image storage) *(or your actual platform)*
+- AWS EC2 (for deployment)
 
 ### 💻 Programming Languages
 - JavaScript (Node.js, React)
@@ -79,7 +81,7 @@ graph TD
 - React, Redux Toolkit, Express.js, Mongoose, Tailwind CSS, Framer Motion, Axios
 
 ### 📦 DevOps & Deployment
-- Docker, GitHub Actions, (optionally: Docker Compose, Nginx)
+- Docker, GitHub Actions
 
 ### 📡 APIs & Integration
 - RESTful APIs
@@ -97,9 +99,7 @@ graph TD
 
 ## 🌌 Testing & Validation
 
-- **Unit Testing:** Jest for backend logic (controllers, models).
 - **Integration Testing:** Postman for API endpoints.
-- **Load Testing:** Simulated concurrent bookings to test MongoDB and API scalability.
 - **Security Testing:** JWT validation, input sanitization, and role-based access checks.
 
 ---
@@ -131,7 +131,7 @@ project-work-group-23/
   │   ├── controller/       # All business logic (auth, booking, cricksal, admin, review, profile)
   │   ├── middleware/       # Auth, error handling
   │   ├── model/            # Mongoose schemas (User, Booking, Cricksal, Review)
-  │   ├── routes/           # Express routers (auth, booking, cricksal, admin, review, profile)
+  │   ├── routes/           # Express routers (auth, booking, cricksal,   admin, review, profile)
   │   ├── uploads/          # Uploaded images
   │   ├── createAdmin.js    # Script to create admin user
   │   ├── server.js         # Main server entry
@@ -152,35 +152,6 @@ project-work-group-23/
       └── package.json      # Frontend dependencies
 ```
 
-
-## � Docker Deployment
-
-This project is fully dockerized for easy deployment and development. See [DOCKER.md](./DOCKER.md) for comprehensive deployment instructions.
-
-### Quick Start with Docker
-
-```bash
-# Start development environment
-./docker.sh dev    # Linux/Mac
-docker.bat dev     # Windows
-
-# Access the application
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:8000
-```
-
-### Production Deployment
-```bash
-# Configure production environment
-cp .env.docker.example .env.docker
-# Edit .env.docker with your production settings
-
-# Start production environment
-./docker.sh prod    # Linux/Mac
-docker.bat prod     # Windows
-```
-
----
 
 ## �📈 Future Enhancements
 

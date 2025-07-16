@@ -23,9 +23,10 @@ const healthRoutes = require('./routes/health');
 
 app.use(express.json());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN === '*' ? true : [
-    process.env.CORS_ORIGIN || "http://localhost:3000",
-    "http://54.164.187.32",
+  origin: [
+    "http://3.94.196.83:5173",
+    "http://3.94.196.83:3000",
+    "http://3.94.196.83",
   ],
   credentials: true
 }));
@@ -36,7 +37,7 @@ app.use(fileUpload({
   abortOnLimit: true,
   responseOnLimit: "File size limit exceeded"
 }))
-app.use(express.static('uploads'))//http://localhost:8000/mm.jpg yo dekhina ko lagi
+app.use(express.static('uploads'))//http://3.94.196.83:8000/mm.jpg yo dekhina ko lagi
 // public path
 
 // Health check endpoint for Docker

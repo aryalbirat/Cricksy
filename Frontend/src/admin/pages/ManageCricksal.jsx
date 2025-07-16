@@ -18,7 +18,7 @@ const ManageCricksal = () => {
   // Fetch cricksals with pagination and search
   const fetchCricksals = async (page = 1) => {
     try {
-      const response = await axios.get('${API_BASE_URL}/api/cricksals', {
+      const response = await axios.get(`${API_BASE_URL}/api/cricksals`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

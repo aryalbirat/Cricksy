@@ -39,7 +39,7 @@ const Bookings = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('${API_BASE_URL}/api/admin/bookings', {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/bookings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

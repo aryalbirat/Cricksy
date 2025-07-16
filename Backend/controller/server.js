@@ -24,9 +24,22 @@ const { startBookingStatusUpdater } = require('./controller/booking.js');
 
 
 app.use(express.json());
-app.use(cors());
-app.use(fileUpload())
-app.use(express.static('uploads'))//http://localhost:8000/mm.jpg yo dekhina ko lagi
+app.use(cors({
+  origin: [
+    "http://3.94.196.83:5173",
+    "http://3.94.196.83:3000",
+    "http://3.94.196.83",
+  ],
+  credentials: true
+}));
+app.use(fileUpload({
+  limits: { 
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5000000 // 5MB default
+  },
+  abortOnLimit: true,
+  responseOnLimit: "File size limit exceeded"
+}))
+app.use(express.static('uploads'))//http://3.94.196.83:8000/mm.jpg yo dekhina ko lagi
 // public path
 
 app.use(authRoutes);

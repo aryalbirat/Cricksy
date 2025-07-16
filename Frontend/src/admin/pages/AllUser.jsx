@@ -32,7 +32,7 @@ const AllUsersForAdmin = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('${API_BASE_URL}/api/admin/allusers', {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/allusers`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

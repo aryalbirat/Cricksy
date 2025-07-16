@@ -30,7 +30,7 @@ const Reviews = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get('${API_BASE_URL}/api/admin/reviews', {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/reviews`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

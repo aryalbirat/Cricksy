@@ -24,10 +24,10 @@ const AdminDashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         const [usersRes, cricksalsRes, bookingsRes, reviewsRes] = await Promise.all([
-          axios.get('${API_BASE_URL}/api/admin/allusers', config).catch(() => ({ data: { users: [] } })),
-          axios.get('${API_BASE_URL}/api/cricksals', config).catch(() => ({ data: { cricksals: [] } })),
-          axios.get('${API_BASE_URL}/api/admin/bookings', config).catch(() => ({ data: { bookings: [] } })),
-          axios.get('${API_BASE_URL}/api/admin/reviews', config).catch(() => ({ data: { reviews: [] } })),
+          axios.get(`${API_BASE_URL}/api/admin/allusers`, config).catch(() => ({ data: { users: [] } })),
+          axios.get(`${API_BASE_URL}/api/cricksals`, config).catch(() => ({ data: { cricksals: [] } })),
+          axios.get(`${API_BASE_URL}/api/admin/bookings`, config).catch(() => ({ data: { bookings: [] } })),
+          axios.get(`${API_BASE_URL}/api/admin/reviews`, config).catch(() => ({ data: { reviews: [] } })),
         ]);
 
         setDashboardData({

@@ -25,9 +25,9 @@ const OwnerDashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         const [bookingsRes, reviewsRes, cricksalsRes] = await Promise.all([
-          axios.get('${API_BASE_URL}/api/owner/bookings', config).catch(() => ({ data: { bookings: [] } })),
-          axios.get('${API_BASE_URL}/api/owner/reviews', config).catch(() => ({ data: { reviews: [] } })),
-          axios.get('${API_BASE_URL}/api/cricksals/owner', config).catch(() => ({ data: { cricksals: [] } })),
+          axios.get(`${API_BASE_URL}/api/owner/bookings`, config).catch(() => ({ data: { bookings: [] } })),
+          axios.get(`${API_BASE_URL}/api/owner/reviews`, config).catch(() => ({ data: { reviews: [] } })),
+          axios.get(`${API_BASE_URL}/api/cricksals/owner`, config).catch(() => ({ data: { cricksals: [] } })),
         ]);
 
         setDashboardData({
