@@ -11,7 +11,7 @@
 ### Group Number: 23
 | Name         | Roll Number | Role                |
 |--------------|-------------|---------------------|
-| Birat Aryal  | 221614      | Frontend + Backend  |
+| Birat Aryal  | 221614      | Fullstack           |
 | Sunil Giri   | 221615      | Backend             |
 | Pragyan      | 221516      | Frontend            |
 | Rupesh       | 221739      | Frontend            |
@@ -87,6 +87,29 @@ graph TD
 - RESTful APIs
 
 ---
+
+## 📸 Screenshots
+
+### Application Interface Overview
+
+<div align="center">
+
+![Screenshot 1](assets/SS%201.png)
+*Home Page and Landing Interface*
+
+![Screenshot 2](assets/SS%202.png)
+*Signin Page*
+
+![Screenshot 3](assets/SS%203.png)
+*Owner Dashboard*
+
+![Screenshot 4](assets/SS%204.png)
+*Admin Dashboard*
+
+![Screenshot 5](assets/SS%205.png)
+*Booking Page*
+
+</div>
 
 ## 🚀 Implementation Highlights
 
