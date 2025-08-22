@@ -1,4 +1,4 @@
-# 🌩️ Cloud Application and Development Foundation
+# Cloud Application and Development Foundation
 ## Course Project: Cricksy: A Smart Cricksal Booking System
 
 > *Department of Software Engineering*  
